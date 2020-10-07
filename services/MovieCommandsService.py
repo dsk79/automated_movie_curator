@@ -113,6 +113,12 @@ class MovieCommands:
         # Make the query call in the service layer with the controller
         results = requestController.retrieve_active_movie_request_list(session)
 
+        # Verify there are results
+        if not results:
+            msg = "```There are no movies in the request queue. Why not add some with the <!add command>?```"
+            await ctx.send(msg)
+            return msg
+
         # Print out the movies in a numbered list
         msg = ""
         i = 1
@@ -204,7 +210,6 @@ class MovieCommands:
         else:
             msg = f"Received valid emoji {reaction.emoji} from user {user}"
             print(msg)
-            await ctx.send(msg)
             return msg, reaction
 
     def get_year_and_title(self, args):
