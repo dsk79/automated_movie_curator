@@ -32,7 +32,7 @@ async def on_ready():
     print('------')
 
     # Set the bot's activity to playing Matchmaker
-    await bot.change_presence(activity=discord.Game(name="Mashi's Movie Manager"))
+    await bot.change_presence(activity=discord.Game(name="Automated Movie Curator"))
 
     # Set the channel on the server which the bot post messages to
     global send_to_channel

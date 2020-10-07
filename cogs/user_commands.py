@@ -13,8 +13,7 @@ class UserCommands(commands.Cog):
 
     @commands.command(
         name='add_role',
-        description='Adds the Movie Viewer role to the user.',
-        aliases=['a']
+        description='Adds the Movie Viewer role to the user.'
     )
     async def add_role_command(self, ctx):
         msg = await user_commands.add_role(ctx, ctx.message.author)
@@ -23,8 +22,7 @@ class UserCommands(commands.Cog):
 
     @commands.command(
         name='remove_role',
-        description='Removes the Movie Viewer role to the user.',
-        aliases=['r']
+        description='Removes the Movie Viewer role to the user.'
     )
     async def remove_role_command(self, ctx):
         msg = await user_commands.remove_role(ctx, ctx.message.author)
