@@ -64,7 +64,8 @@ class MovieCommands(commands.Cog):
     async def add_movie_command_error(self, ctx, error):
         if isinstance(error, commands.CheckFailure):
             utils.print_and_log(error)
-            msg = f"{ctx.message.author.name}, there was an error when adding your request! :( Please try again!"
+            msg = f"{ctx.message.author.name}, there was an error when adding your request! :(\n" \
+                  f"Did you give yourself the proper role with '!add_role' ?"
             await ctx.send(f"```{msg}```")
 
 
