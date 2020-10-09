@@ -48,7 +48,7 @@ class PollCommands:
                 msg += f"{emoji_unicode_dict[i]} {request.Movie.movie_title} ({request.Movie.movie_year})"
 
                 # Create IMDB URL for the movie listing
-                imdb_db_url = " <" + IMDB_URL + request.Movie.movie_id + ">\n"
+                imdb_db_url = " - <" + IMDB_URL + request.Movie.movie_id + ">\n"
                 msg += imdb_db_url
 
             # Send message containing the movies to the channel

@@ -52,7 +52,7 @@ class MovieCommands:
 
         # if there is any ambiguity for the movie, have the user determine which movie was intended
         if len(movie_list) > 1:
-            msg = f'Multiple possibilities found. Please select from the below list or refine your search.\n'
+            msg = f'Multiple possibilities found. Please select from the below list or refine your search.\n\n'
             print(msg)
             await ctx.send(msg)
 
@@ -87,9 +87,6 @@ class MovieCommands:
         finally:
             await ctx.send(msg)
 
-            imdb_db_url = IMDB_URL + selected_movie['imdbID']
-            await ctx.send(imdb_db_url)
-
             # Grab the movie year and title from the response in case no year was passed in
             movie_year, movie_title = selected_movie['Year'], selected_movie['Title']
 
@@ -100,6 +97,10 @@ class MovieCommands:
             msg = f'{ctx.author.name}, your suggestion of {movie_title} ({movie_year}) has been added!'
             print(msg)
             await ctx.send(msg)
+
+            imdb_db_url = IMDB_URL + selected_movie['imdbID']
+            await ctx.send(imdb_db_url)
+
             session.close()
 
     async def list_movies(self, ctx):
@@ -126,7 +127,8 @@ class MovieCommands:
         for result in results:
             print(result)
             movie = result.Movie
-            msg += f"{i}) {movie.movie_title} ({movie.movie_year})\n"
+            imdb_db_url = " <" + IMDB_URL + movie.movie_id + ">"
+            msg += f"{i}) {movie.movie_title} ({movie.movie_year}) - {imdb_db_url}\n"
             i += 1
 
             if i % 10 == 1:
