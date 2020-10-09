@@ -1,4 +1,5 @@
 import logging
+import time
 
 import discord
 
@@ -7,6 +8,9 @@ import settings.discord as settings
 
 # function to help facilitate logging
 def print_and_log(msg):
+    ts = time.gmtime()
+
+    msg = f'{(time.strftime("%Y-%m-%d %H:%M:%S", ts))} {msg}'
     print(msg)
     logging.info(msg)
 
