@@ -1,7 +1,7 @@
 from discord.ext import commands
 
 from services import PollCommandsService
-from utils.utils import has_movie_manager_role
+from utils.utils import has_movie_manager_role, originated_from_server
 
 # Create instance of the service
 poll_commands = PollCommandsService.PollCommands()
@@ -28,6 +28,7 @@ class PollCommands(commands.Cog):
               '\t!create_poll -max 3 -type newest'
     )
     @commands.check(has_movie_manager_role)
+    @commands.check(originated_from_server)
     async def create_movie_poll_command(self, ctx, *args):
         msg = await poll_commands.create_movie_poll(self.bot, ctx, args)
 

@@ -2,17 +2,28 @@ import logging
 import time
 
 import discord
+from discord.ext.commands import MessageNotFound
 
 import settings.discord as settings
 
 
-# function to help facilitate logging
+# Function to help facilitate logging
 def print_and_log(msg):
     ts = time.gmtime()
 
     msg = f'{(time.strftime("%Y-%m-%d %H:%M:%S", ts))} {msg}'
     print(msg)
     logging.info(msg)
+
+
+# Function to verify that the command being processed originated from the same server
+def originated_from_server(ctx):
+    ctx_from_server = str(ctx.guild.id) == settings.server_id
+    msg = f'ctx originated from server is {ctx_from_server}'
+    print(msg)
+
+    if not ctx_from_server:
+        raise MessageNotFound(msg)
 
 
 # Function to get the specified role from the server

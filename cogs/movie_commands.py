@@ -2,7 +2,7 @@ from discord.ext import commands
 
 from services import MovieCommandsService
 from utils import utils
-from utils.utils import has_movie_role
+from utils.utils import has_movie_role, originated_from_server
 
 # Create instance of the service
 movie_commands = MovieCommandsService.MovieCommands()
@@ -23,6 +23,7 @@ class MovieCommands(commands.Cog):
               '\t!add The Lion King -year 1994'
     )
     @commands.check(has_movie_role)
+    @commands.check(originated_from_server)
     async def add_movie_command(self, ctx, *args):
         msg = await movie_commands.add_movie(self.bot, ctx, args)
 
@@ -34,8 +35,8 @@ class MovieCommands(commands.Cog):
         description='Lists all movies in the suggestion queue.'
     )
     @commands.check(has_movie_role)
+    @commands.check(originated_from_server)
     async def list_movies_command(self, ctx):
-        # msg = await movie_commands.list_movies(ctx)
         msg = await movie_commands.list_movies(ctx)
 
         utils.print_and_log(msg)
@@ -49,6 +50,7 @@ class MovieCommands(commands.Cog):
         usage='<movie_index_number> <movie_index_number2> <movie_index_number3>.'
     )
     @commands.check(has_movie_role)
+    @commands.check(originated_from_server)
     async def remove_movie_command(self, ctx, *args):
         removed_movie_resp, failed_movie_resp = await movie_commands.remove_movies(ctx, args)
 
@@ -62,6 +64,10 @@ class MovieCommands(commands.Cog):
 
     @add_movie_command.error
     async def add_movie_command_error(self, ctx, error):
+        # If the command was not from the same server, ignore this
+        if isinstance(error, commands.MessageNotFound):
+            return
+
         if isinstance(error, commands.CheckFailure):
             utils.print_and_log(error)
             msg = f"{ctx.message.author.name}, there was an error when adding your request! :(\n" \
