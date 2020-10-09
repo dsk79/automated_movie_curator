@@ -14,8 +14,21 @@ class MovieCommands(commands.Cog):
 
     @commands.command(
         name='add',
-        description='Adds a movie to suggestion list.',
-        usage='<movie_name>'
+        description='Adds a movie to suggestion list.\n'
+                    'Optional flag of "-year" may be used to specify a year to narrow results.',
+        usage='<movie_name>\n'
+              '\nAdd a movie made in a specific year\n'
+              '\t!add <movie_name> -year <movie_year>\n'
+              '\nExample of adding the movie "The Lion King" made in 1994\n'
+              '\t!add The Lion King -year 1994'
+
+        # usage = '\n'
+        #         '\nCreate a poll with 5 choices with movies picked randomly:\n'
+        #         '\t!create_poll -max 5\n\n'
+        #         'Create a poll with the default 4 choices max and taking the oldest reqest:\n'
+        #         '\t!create_poll -type oldest\n\n'
+        #         'Create a poll with 3 choices max and taking the most recent requests:\n'
+        #         '\t!create_poll -max 3 -type newest'
     )
     @commands.check(has_movie_role)
     async def add_movie_command(self, ctx, *args):
