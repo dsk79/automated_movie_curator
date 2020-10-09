@@ -47,6 +47,7 @@ class MovieCommands:
 
         # If validation failed, return error message here
         if validation_result is not None:
+            await ctx.send(validation_result)
             return validation_result
 
         # if there is any ambiguity for the movie, have the user determine which movie was intended
@@ -264,7 +265,7 @@ class MovieCommands:
 
         # Verify a match was found, otherwise inform user no movies matching were found
         if response_json['Response'] == 'False' or response_json['totalResults'] == 0:
-            msg = f'{ctx.author.name}, no movies were found with the name of {searched_movie_title}!'
+            msg = f'```{ctx.author.name}, no movies were found with the name of {searched_movie_title}!```'
             if searched_movie_year:
                 msg = msg + f' ({searched_movie_year})'
             print(msg)

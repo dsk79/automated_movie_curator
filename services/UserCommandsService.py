@@ -44,8 +44,9 @@ class UserCommands:
             # Add the role to user on the discord if they do not have it already
             await member.add_roles(movie_role)
         else:
-            print("user has role while attempting to add role, check failure raised")
-            raise CheckFailure
+            err_msg = "user has role while attempting to add role, check failure raised"
+            print(err_msg)
+            raise CheckFailure(err_msg)
 
         # Send message to channel
         await ctx.send(f"```{msg}```")
@@ -84,8 +85,9 @@ class UserCommands:
             # Add the role to user on the discord if they do not have it already
             await member.remove_roles(movie_role)
         else:
-            raise CheckFailure
-            print("user does not have role while attempting to remove role, check failure raised")
+            err_msg = "user does not have role while attempting to remove role, check failure raised"
+            raise CheckFailure(err_msg)
+            print(err_msg)
 
         # Send message to channel
         await ctx.send(f"```{msg}```")
