@@ -198,7 +198,7 @@ class MovieCommands:
             return reaction.emoji in number_emoji_list and user.id == ctx.author.id
 
         try:
-            reaction, user = await bot.wait_for("reaction_add", timeout=5.0, check=check)
+            reaction, user = await bot.wait_for("reaction_add", timeout=15.0, check=check)
         except asyncio.TimeoutError as e:
             msg = f"No emoji response received from {ctx.author.name}. " \
                   f"Please retry your suggestion or narrow your search."
