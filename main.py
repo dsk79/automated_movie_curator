@@ -24,6 +24,13 @@ send_to_channel = None
 # Global variable to hold the server's channel where this bot should read messages from
 read_from_channel = None
 
+
+@bot.event
+async def on_message(message):
+    if str(message.guild.id) == discord_settings.server_id:
+        await bot.process_commands(message)
+
+
 @bot.event
 async def on_ready():
     print('Logged in as')

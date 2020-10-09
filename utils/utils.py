@@ -25,6 +25,8 @@ def originated_from_server(ctx):
     if not ctx_from_server:
         raise MessageNotFound(msg)
 
+    return True
+
 
 # Function to get the specified role from the server
 def get_server_role(ctx, role_id):
