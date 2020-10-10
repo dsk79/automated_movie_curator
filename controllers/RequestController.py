@@ -47,7 +47,7 @@ class RequestController:
         """
         print(f"start {self.retrieve_movie_poll_requests.__name__}")
 
-        # Retrieve active requests up to num_choices, and gatherd by selection type
+        # Retrieve active requests up to num_choices, and gathered by selection type
         response = self.__find_poll_requests(session,
                                              num_choices=num_choices,
                                              choice_selection_type=choice_selection)
@@ -178,7 +178,8 @@ class RequestController:
 
                 results = session.query(request.Request, movie.Movie) \
                     .join(movie.Movie, request.Request.movie_id == movie.Movie.id) \
-                    .filter(request.Request.movie_id.in_(movie_ids))
+                    .filter(request.Request.movie_id.in_(movie_ids)) \
+                    .filter(request.Request.active == True) \
 
         if results.count() == 0:
             return None
