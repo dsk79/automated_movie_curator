@@ -75,7 +75,6 @@ class MovieCommands:
 
             msg = f"Adding 1 perfect match. {selected_movie['Title']} ({selected_movie['Year']})"
             print(msg)
-            await ctx.send(msg)
 
         try:
             imdb_id, movie_title, movie_year = selected_movie['imdbID'], selected_movie['Title'], selected_movie['Year']
